@@ -80,4 +80,3 @@ deploy:
   type: git
   repo: https://github.com/KangYoosam/KangYoosam.github.io
   branch: master
-  message: Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}
