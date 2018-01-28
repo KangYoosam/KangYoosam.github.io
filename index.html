@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kangyoosam.github.io"></form>
@@ -60,6 +60,93 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-expoを使いながらreact-native-image-pickerを使ったらえらい目にあった" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/" class="article-date">
+  <time datetime="2018-01-28T16:34:49.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/">expoを使いながらreact-native-image-pickerを使ったらえらい目にあった</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>Reactnativeでの実装をexpoを使ってやってる</li>
+<li>expoを使うのはリリースまでの実装スピードを上げるためで、リリース直前に捨てようと思ってる</li>
+</ul>
+<h2 id="起きた問題"><a href="#起きた問題" class="headerlink" title="起きた問題"></a>起きた問題</h2><p>プロパティは存在するのに(<code>console.log</code>で確認)実行すると<code>cannnot read property</code>になる。<br>謎。。。。↓はそのときの画像<br><img src="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/1.png" title="exma"><br><img src="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/2.png" title="exma"></p>
+<h2 id="結論-原因"><a href="#結論-原因" class="headerlink" title="結論(原因)"></a>結論(原因)</h2><h4 id="ImagePickerの中身の変数がundefinedだった。"><a href="#ImagePickerの中身の変数がundefinedだった。" class="headerlink" title="ImagePickerの中身の変数がundefinedだった。"></a>ImagePickerの中身の変数がundefinedだった。</h4><p>以下が<code>ImagePicker</code>の定義<br><a href="https://github.com/react-community/react-native-image-picker/blob/develop/index.js#L4" target="_blank" rel="noopener">https://github.com/react-community/react-native-image-picker/blob/develop/index.js#L4</a><br>このハイライトしてあるNativeModulesに<code>ImagePicker</code>が含まれていなかった。<br>expoが依存している<code>NativeModules</code>を参照してしまった？みたい。依存関係の問題っぽい。<br>なので、<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ImagePicker &#125; <span class="keyword">from</span> <span class="string">'react-native-image-picker'</span></span><br></pre></td></tr></table></figure></p>
+<p>を<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">'expo'</span></span><br></pre></td></tr></table></figure></p>
+<p>にすれば使えた。</p>
+<h2 id="学んだこと"><a href="#学んだこと" class="headerlink" title="学んだこと"></a>学んだこと</h2><p>リリースまでだけ<code>expo</code>を使う作戦は微妙かも</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/" data-id="cjcz0p6gj0003kn8wu5pcbg71" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ImageMagickでno-decode-delegate-for-this-image-formatになって困った" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/" class="article-date">
+  <time datetime="2018-01-28T16:12:26.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/">ImageMagickでno decode delegate for this image formatになって困った</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="エラー"><a href="#エラー" class="headerlink" title="エラー"></a>エラー</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; Error: Command failed: convert: no decode delegate for this image format `&apos; @ error/constitute.c/ReadImage/509.</span><br><span class="line">convert: no images defined `/tmp/upload_85_converted.jpg&apos; @ error/convert.c/ConvertImageCommand/3275.</span><br></pre></td></tr></table></figure>
+<h2 id="解決した方法（原因）"><a href="#解決した方法（原因）" class="headerlink" title="解決した方法（原因）"></a>解決した方法（原因）</h2><p>ImageMagickに渡していた画像パスが<code>data:image/png;base64,iVBORw0KGg…………</code>のような形式だった。<br>この前半部分<code>data:image/png;base64,</code>の部分は単に<strong>画像がbase64形式であることを示すだけのもの</strong>なので、この部分が余計だった。splitメソッド(<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/split)を使って前半部分を取り除けば解決した。" target="_blank" rel="noopener">https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/split)を使って前半部分を取り除けば解決した。</a></p>
+<h2 id="他に試したこと"><a href="#他に試したこと" class="headerlink" title="他に試したこと"></a>他に試したこと</h2><ul>
+<li><code>convert -list format</code>と打って、pngやjpg（今回使った画像の拡張子）が出てこないかチェック<br>=&gt; 出てきた（なので問題なかった）</li>
+</ul>
+<h2 id="参考にしたサイト（今回の解決方法には直接寄与していない）"><a href="#参考にしたサイト（今回の解決方法には直接寄与していない）" class="headerlink" title="参考にしたサイト（今回の解決方法には直接寄与していない）"></a>参考にしたサイト（今回の解決方法には直接寄与していない）</h2><p><a href="http://dqn.sakusakutto.jp/2013/10/no_decode_delegate_for_this_image_format.html" target="_blank" rel="noopener">http://dqn.sakusakutto.jp/2013/10/no_decode_delegate_for_this_image_format.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kangyoosam.github.io/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/" data-id="cjcz0p6gf0001kn8wkf61lw8i" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-kangyoosam-coinを作ってみた" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -98,7 +185,44 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kangyoosam.github.io/2018/01/25/kangyoosam-coinを作ってみた/" data-id="cjcuat6130004te8wbq0jh8ya" class="article-share-link">Share</a>
+      <a data-url="https://kangyoosam.github.io/2018/01/25/kangyoosam-coinを作ってみた/" data-id="cjcz0p6gn0006kn8w57o63oel" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexoが良さそうだから使う" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/25/hexoが良さそうだから使う/" class="article-date">
+  <time datetime="2018-01-25T08:38:22.000Z" itemprop="datePublished">2018-01-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Hexo ってなんだろう？って段階で見始めた <em>Giraffe Academy</em> って動画が分かりやすすぎた<br><a href="https://www.youtube.com/watch?v=Jiwbmyc4nCA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=Jiwbmyc4nCA</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kangyoosam.github.io/2018/01/25/hexoが良さそうだから使う/" data-id="cjcz0p6gk0004kn8wc60km5vp" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -141,44 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kangyoosam.github.io/2018/01/25/hexoのsnippets/" data-id="cjcuat60x0000te8weyq59c2l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexoが良さそうだから使う" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/25/hexoが良さそうだから使う/" class="article-date">
-  <time datetime="2018-01-25T08:38:22.000Z" itemprop="datePublished">2018-01-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Hexo ってなんだろう？って段階で見始めた <em>Giraffe Academy</em> って動画が分かりやすすぎた<br><a href="https://www.youtube.com/watch?v=Jiwbmyc4nCA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=Jiwbmyc4nCA</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://kangyoosam.github.io/2018/01/25/hexoが良さそうだから使う/" data-id="cjcuat6120003te8wvael8ske" class="article-share-link">Share</a>
+      <a data-url="https://kangyoosam.github.io/2018/01/25/hexoのsnippets/" data-id="cjcz0p6gm0005kn8wrcj3z58f" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -214,20 +301,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/">expoを使いながらreact-native-image-pickerを使ったらえらい目にあった</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/">ImageMagickでno decode delegate for this image formatになって困った</a>
+          </li>
         
           <li>
             <a href="/2018/01/25/kangyoosam-coinを作ってみた/">kangyoosam_coinを作ってみた</a>
           </li>
         
           <li>
-            <a href="/2018/01/25/hexoのsnippets/">hexoのsnippets</a>
+            <a href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
           </li>
         
           <li>
-            <a href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
+            <a href="/2018/01/25/hexoのsnippets/">hexoのsnippets</a>
           </li>
         
       </ul>
@@ -243,7 +338,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
