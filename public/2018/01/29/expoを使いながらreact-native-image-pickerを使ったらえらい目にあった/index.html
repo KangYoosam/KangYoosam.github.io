@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>expoを使いながらreact-native-image-pickerを使ったらえらい目にあった | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前提 Reactnativeでの実装をexpoを使ってやってる expoを使うのはリリースまでの実装スピードを上げるためで、リリース直前に捨てようと思ってる  起きた問題プロパティは存在するのに(console.logで確認)実行するとcannnot read propertyになる。謎。。。。↓はそのときの画像 結論(原因)ImagePickerの中身の変数がundefinedだった。以下がIm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="expoを使いながらreact-native-image-pickerを使ったらえらい目にあった">
+<meta property="og:url" content="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前提 Reactnativeでの実装をexpoを使ってやってる expoを使うのはリリースまでの実装スピードを上げるためで、リリース直前に捨てようと思ってる  起きた問題プロパティは存在するのに(console.logで確認)実行するとcannnot read propertyになる。謎。。。。↓はそのときの画像 結論(原因)ImagePickerの中身の変数がundefinedだった。以下がIm">
+<meta property="og:image" content="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/1.png">
+<meta property="og:image" content="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/2.png">
+<meta property="og:updated_time" content="2018-01-28T16:46:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="expoを使いながらreact-native-image-pickerを使ったらえらい目にあった">
+<meta name="twitter:description" content="前提 Reactnativeでの実装をexpoを使ってやってる expoを使うのはリリースまでの実装スピードを上げるためで、リリース直前に捨てようと思ってる  起きた問題プロパティは存在するのに(console.logで確認)実行するとcannnot read propertyになる。謎。。。。↓はそのときの画像 結論(原因)ImagePickerの中身の変数がundefinedだった。以下がIm">
+<meta name="twitter:image" content="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kangyoosam.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-expoを使いながらreact-native-image-pickerを使ったらえらい目にあった" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/" class="article-date">
+  <time datetime="2018-01-28T16:34:49.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      expoを使いながらreact-native-image-pickerを使ったらえらい目にあった
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>Reactnativeでの実装をexpoを使ってやってる</li>
+<li>expoを使うのはリリースまでの実装スピードを上げるためで、リリース直前に捨てようと思ってる</li>
+</ul>
+<h2 id="起きた問題"><a href="#起きた問題" class="headerlink" title="起きた問題"></a>起きた問題</h2><p>プロパティは存在するのに(<code>console.log</code>で確認)実行すると<code>cannnot read property</code>になる。<br>謎。。。。↓はそのときの画像<br><img src="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/1.png" title="exma"><br><img src="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/2.png" title="exma"></p>
+<h2 id="結論-原因"><a href="#結論-原因" class="headerlink" title="結論(原因)"></a>結論(原因)</h2><h4 id="ImagePickerの中身の変数がundefinedだった。"><a href="#ImagePickerの中身の変数がundefinedだった。" class="headerlink" title="ImagePickerの中身の変数がundefinedだった。"></a>ImagePickerの中身の変数がundefinedだった。</h4><p>以下が<code>ImagePicker</code>の定義<br><a href="https://github.com/react-community/react-native-image-picker/blob/develop/index.js#L4" target="_blank" rel="noopener">https://github.com/react-community/react-native-image-picker/blob/develop/index.js#L4</a><br>このハイライトしてあるNativeModulesに<code>ImagePicker</code>が含まれていなかった。<br>expoが依存している<code>NativeModules</code>を参照してしまった？みたい。依存関係の問題っぽい。<br>なので、<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ImagePicker &#125; <span class="keyword">from</span> <span class="string">'react-native-image-picker'</span></span><br></pre></td></tr></table></figure></p>
+<p>を<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">'expo'</span></span><br></pre></td></tr></table></figure></p>
+<p>にすれば使えた。</p>
+<h2 id="学んだこと"><a href="#学んだこと" class="headerlink" title="学んだこと"></a>学んだこと</h2><p>リリースまでだけ<code>expo</code>を使う作戦は微妙かも</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kangyoosam.github.io/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/" data-id="cjcz0p6gj0003kn8wu5pcbg71" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ImageMagickでno decode delegate for this image formatになって困った</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/">expoを使いながらreact-native-image-pickerを使ったらえらい目にあった</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/">ImageMagickでno decode delegate for this image formatになって困った</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/kangyoosam-coinを作ってみた/">kangyoosam_coinを作ってみた</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/hexoのsnippets/">hexoのsnippets</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

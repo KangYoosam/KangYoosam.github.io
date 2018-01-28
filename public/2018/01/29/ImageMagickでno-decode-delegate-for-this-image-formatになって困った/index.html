@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ImageMagickでno decode delegate for this image formatになって困った | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="エラー12&amp;#123; Error: Command failed: convert: no decode delegate for this image format `&amp;apos; @ error/constitute.c/ReadImage/509.convert: no images defined `/tmp/upload_85_converted.jpg&amp;apos; @ error/c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ImageMagickでno decode delegate for this image formatになって困った">
+<meta property="og:url" content="https://kangyoosam.github.io/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="エラー12&amp;#123; Error: Command failed: convert: no decode delegate for this image format `&amp;apos; @ error/constitute.c/ReadImage/509.convert: no images defined `/tmp/upload_85_converted.jpg&amp;apos; @ error/c">
+<meta property="og:updated_time" content="2018-01-28T16:19:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ImageMagickでno decode delegate for this image formatになって困った">
+<meta name="twitter:description" content="エラー12&amp;#123; Error: Command failed: convert: no decode delegate for this image format `&amp;apos; @ error/constitute.c/ReadImage/509.convert: no images defined `/tmp/upload_85_converted.jpg&amp;apos; @ error/c">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kangyoosam.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ImageMagickでno-decode-delegate-for-this-image-formatになって困った" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/" class="article-date">
+  <time datetime="2018-01-28T16:12:26.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ImageMagickでno decode delegate for this image formatになって困った
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="エラー"><a href="#エラー" class="headerlink" title="エラー"></a>エラー</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; Error: Command failed: convert: no decode delegate for this image format `&apos; @ error/constitute.c/ReadImage/509.</span><br><span class="line">convert: no images defined `/tmp/upload_85_converted.jpg&apos; @ error/convert.c/ConvertImageCommand/3275.</span><br></pre></td></tr></table></figure>
+<h2 id="解決した方法（原因）"><a href="#解決した方法（原因）" class="headerlink" title="解決した方法（原因）"></a>解決した方法（原因）</h2><p>ImageMagickに渡していた画像パスが<code>data:image/png;base64,iVBORw0KGg…………</code>のような形式だった。<br>この前半部分<code>data:image/png;base64,</code>の部分は単に<strong>画像がbase64形式であることを示すだけのもの</strong>なので、この部分が余計だった。splitメソッド(<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/split)を使って前半部分を取り除けば解決した。" target="_blank" rel="noopener">https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/split)を使って前半部分を取り除けば解決した。</a></p>
+<h2 id="他に試したこと"><a href="#他に試したこと" class="headerlink" title="他に試したこと"></a>他に試したこと</h2><ul>
+<li><code>convert -list format</code>と打って、pngやjpg（今回使った画像の拡張子）が出てこないかチェック<br>=&gt; 出てきた（なので問題なかった）</li>
+</ul>
+<h2 id="参考にしたサイト（今回の解決方法には直接寄与していない）"><a href="#参考にしたサイト（今回の解決方法には直接寄与していない）" class="headerlink" title="参考にしたサイト（今回の解決方法には直接寄与していない）"></a>参考にしたサイト（今回の解決方法には直接寄与していない）</h2><p><a href="http://dqn.sakusakutto.jp/2013/10/no_decode_delegate_for_this_image_format.html" target="_blank" rel="noopener">http://dqn.sakusakutto.jp/2013/10/no_decode_delegate_for_this_image_format.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kangyoosam.github.io/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/" data-id="cjcz0p6gf0001kn8wkf61lw8i" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          expoを使いながらreact-native-image-pickerを使ったらえらい目にあった
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/25/kangyoosam-coinを作ってみた/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">kangyoosam_coinを作ってみた</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/29/expoを使いながらreact-native-image-pickerを使ったらえらい目にあった/">expoを使いながらreact-native-image-pickerを使ったらえらい目にあった</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/ImageMagickでno-decode-delegate-for-this-image-formatになって困った/">ImageMagickでno decode delegate for this image formatになって困った</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/kangyoosam-coinを作ってみた/">kangyoosam_coinを作ってみた</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/hexoが良さそうだから使う/">hexoが良さそうだから使う</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/25/hexoのsnippets/">hexoのsnippets</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
